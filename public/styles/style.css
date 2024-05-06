@@ -1,0 +1,74 @@
+:root {
+    --background-dark: #343a40;
+    --background-light: #f8f9fa;
+    --text-color-light: #ffffff;
+    --padding-small: 10px;
+    --padding-medium: 20px;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: var(--background-dark);
+    color: var(--text-color-light);
+    background-image: url('/Users/danielberhane/Desktop/CMSC335/CMSC_335_Projects/myapp/Background_image.jpg');
+    padding: var(--padding-small) var(--padding-medium);
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin-right: var(--padding-small);
+}
+
+header nav ul li a {
+    color: var(--text-color-light);
+    text-decoration: none;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.planet {
+    margin: var(--padding-medium);
+    padding: var(--padding-medium);
+    background-color: var(--background-light);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+footer {
+    text-align: center;
+    padding: var(--padding-small);
+    background-color: var(--background-dark);
+    color: var(--text-color-light);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    header, footer {
+        padding: var(--padding-small);
+    }
+
+    .planet {
+        margin: var(--padding-small);
+        padding: var(--padding-small);
+    }
+
+    header nav ul li {
+        margin-right: 5px;
+        font-size: 14px;
+    }
+}

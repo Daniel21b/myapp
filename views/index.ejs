@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select a Planet</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <script src="/scripts/validation.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Planet Selection</h1>
+        <p>Select your desired planet from the list below:</p>
+    </header>
+    <main>
+
+        <form action="/planets/purchase" method="post" id="planetForm">
+            <label for="planet-select">Choose a planet:</label>
+            <select id="planet-select" name="planetId" required aria-required="true">
+                <option value="" disabled selected>Select a planet</option>
+                <% if(planets.length > 0) { %>
+                    <% planets.forEach(function(planet) { %>
+                        <option value="<%= planet.id %>"><%= planet.name %></option>
+                    <% }); %>
+                <% } else { %>
+                    <option value="">No planets available</option>
+                <% } %>
+            </select>
+            <input type="submit" value="Proceed to Purchase">
+        </form>
+    </main>
+    <footer>
+        <p>Thank you for choosing our planetary sales service!</p>
+    </footer>
+    <script>
+        document.getElementById('planetForm').addEventListener('submit', function(event) {
+            const selectElement = document.getElementById('planet-select');
+            if (selectElement.value === "") {
+                alert('Please select a planet before proceeding.');
+                event.preventDefault(); // Prevent form from submitting
+            } else {
+                this.querySelector('input[type="submit"]').value = "Processing...";
+                this.querySelector('input[type="submit"]').disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>

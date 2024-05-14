@@ -1,74 +1,199 @@
-:root {
-    --background-dark: #343a40;
-    --background-light: #f8f9fa;
-    --text-color-light: #ffffff;
-    --padding-small: 10px;
-    --padding-medium: 20px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
 body, html {
+    height: 100%;
     margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+    position: relative;
+    background: #000;
+    background-size: cover;
+    color: #e0e2f1;
+    font-family: 'Orbitron', sans-serif;
+    animation: backgroundFade 20s infinite alternate;
 }
 
-header {
-    background-color: var(--background-dark);
-    color: var(--text-color-light);
-    background-image: url('/Users/danielberhane/Desktop/CMSC335/CMSC_335_Projects/myapp/Background_image.jpg');
-    padding: var(--padding-small) var(--padding-medium);
-    text-align: center;
+@keyframes backgroundFade {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(0.7); }
 }
 
-header nav ul {
-    list-style: none;
-    padding: 0;
+h1, h3 {
+    color: #ccd6f6;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+    animation: glow 1.5s ease-in-out infinite alternate;
 }
 
-header nav ul li {
-    display: inline;
-    margin-right: var(--padding-small);
+@keyframes glow {
+    from { text-shadow: 0 0 10px #fff, 0 0 20px #fff; }
+    to { text-shadow: 0 0 20px #fff, 0 0 30px #fff; }
 }
 
-header nav ul li a {
-    color: var(--text-color-light);
-    text-decoration: none;
+input, select, textarea {
+    background-color: #333;
+    border: 2px solid #5c5f77;
+    color: #ccd6f6;
+    padding: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-header nav ul li a:hover {
-    text-decoration: underline;
+input:hover, select:hover, textarea:hover {
+    background-color: #444;
+    transform: scale(1.05);
 }
 
-.planet {
-    margin: var(--padding-medium);
-    padding: var(--padding-medium);
-    background-color: var(--background-light);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+label {
+    color: #e0e2f1;
 }
 
-footer {
-    text-align: center;
-    padding: var(--padding-small);
-    background-color: var(--background-dark);
-    color: var(--text-color-light);
-    position: fixed;
-    bottom: 0;
+button, input[type="submit"], input[type="reset"] {
+    background-color: #50576e;
+    border: none;
+    color: #fff;
+    padding: 12px 24px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+button::after, input[type="submit"]::after, input[type="reset"]::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
     width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: left 0.3s ease;
+}
+
+button:hover::after, input[type="submit"]:hover::after, input[type="reset"]:hover::after {
+    left: 100%;
+}
+
+button:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+    background-color: #6c7293;
+    transform: scale(1.05);
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 5px;
+    background: rgba(10, 10, 30, 0.8);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.top-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.top-buttons button, .top-buttons a {
+    background-color: #50576e;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.top-buttons button:hover, .top-buttons a:hover {
+    background-color: #6c7293;
+    transform: scale(1.1);
+}
+
+.top-buttons a {
+    display: inline-block;
 }
 
 @media (max-width: 600px) {
-    header, footer {
-        padding: var(--padding-small);
+    .form-container {
+        width: 90%;
     }
+    input, select, textarea {
+        width: 100%;
+    }
+    .top-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .top-buttons button, .top-buttons a {
+        margin-bottom: 10px;
+    }
+}
 
-    .planet {
-        margin: var(--padding-small);
-        padding: var(--padding-small);
-    }
+.form-group, .logistics-section {
+    border: 1px solid #50576e;
+    background-color: rgba(50, 55, 70, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    animation: float 4s ease-in-out infinite alternate;
+}
 
-    header nav ul li {
-        margin-right: 5px;
-        font-size: 14px;
-    }
+@keyframes float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+.form-group h3, .logistics-section h2 {
+    color: #ccd6f6;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+.form-group label, .logistics-section label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="range"], .logistics-section input[type="range"] {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.form-group select, .logistics-section select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.form-group small, .logistics-section small {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+}
+
+.booking-info {
+    border: 1px solid #50576e;
+    background-color: rgba(50, 55, 70, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    animation: float 4s ease-in-out infinite alternate;
+}
+
+.booking-info p {
+    margin: 10px 0;
+    color: #ccd6f6;
 }

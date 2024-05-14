@@ -1,48 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select a Planet</title>
-    <link rel="stylesheet" href="/styles/style.css">
-    <script src="/scripts/validation.js" defer></script>
+    <meta charset="utf-8" />
+    <title>Booking Information</title>
+    <link rel="stylesheet" href="/styles/style.css"> 
 </head>
 <body>
-    <header>
-        <h1>Planet Selection</h1>
-        <p>Select your desired planet from the list below:</p>
-    </header>
-    <main>
 
-        <form action="/planets/purchase" method="post" id="planetForm">
-            <label for="planet-select">Choose a planet:</label>
-            <select id="planet-select" name="planetId" required aria-required="true">
-                <option value="" disabled selected>Select a planet</option>
-                <% if(planets.length > 0) { %>
-                    <% planets.forEach(function(planet) { %>
-                        <option value="<%= planet.id %>"><%= planet.name %></option>
-                    <% }); %>
-                <% } else { %>
-                    <option value="">No planets available</option>
-                <% } %>
-            </select>
-            <input type="submit" value="Proceed to Purchase">
-        </form>
-    </main>
-    <footer>
-        <p>Thank you for choosing our planetary sales service!</p>
-    </footer>
+    <audio id="background-audio" loop>
+        <source src="/styles/audio/moon.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="top-buttons">
+        <button id="audio-control" onclick="toggleAudio()">Shuttle radio</button>
+        <button><a href="/tracker" id="iss-tracker-link">ISS tracker</a></button>
+    </div>
+
+    <div class="form-container">
+        <h1>Fly me to the moon</h1>
+
+        <div class="form-section">
+            <h2>Ticket Information</h2>
+            <form action="/processFlightBooking" method="post">
+                <div class="form-group">
+                    <h3><strong>Details</strong></h3>
+                    <label><strong>Name</strong>: <input type="text" name="name" id="name" required /></label><br><br>
+                    <label><strong>Email Address</strong>: <input type="email" name="email" id="email" required></label><br><br>
+                    <label><strong>Age</strong>: <input type="number" name="age" id="age" required /></label><br><br>
+                    <label><strong>Ticket Number</strong>: <input type="text" name="ticketNumber" id="ticket-number" required /></label><br><br>
+                </div>
+
+                <div class="form-group">
+                    <h3><strong>Accommodation Preference</strong></h3>
+                    <label>
+                        <select name="accommodation" id="accommodation-preference">
+                            <option value="lunar_base">VIP Crew Compartment, special tour included</option>
+                            <option value="orbital_hotel">In the Orbiter</option>
+                            <option value="space_capsule">Space Capsule</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </label><br><br>
+                </div>
+
+                <div class="form-group">
+                    <h3><strong>Flight Preferences</strong></h3>
+                    <label for="flight-provider">Select Flight Provider:</label>
+                    <select name="flightProvider" id="flight-provider">
+                        <option value="blue_origin">Blue Origin</option>
+                        <option value="spacex">SpaceX</option>
+                        <option value="nasa">NASA</option>
+                        <option value="other">Other</option>
+                    </select><br><br>
+
+                    <label>Reasons for leaving the earth:</label><br>
+                    <label><input type="radio" name="reason" value="Because it's there" id="reason-because-there"> Because the moon is there</label><br>
+                    <label><input type="radio" name="reason" value="Just for fun" id="reason-just-fun"> To get away from Papa Nelson</label><br>
+                    <label><input type="radio" name="reason" value="Bored of Earth" id="reason-bored-earth"> Bored of Earth</label><br>
+                    <label><input type="radio" name="reason" value="To take selfies" id="reason-selfies"> Take photos</label><br>
+                </div>
+
+                <div class="logistics-section">
+                    <h2><strong>Customize Suit</strong></h2>
+                    <div class="form-group">
+                        <label for="suit-noise-cancelation"><strong>Space noise cancelation:</strong></label>
+                        <input type="range" id="suit-noise-cancelation" name="spaceSuitSetting" min="0" max="10" value="5">
+                        <small>(0 for minimal protection up to 10 for maximum ear protection)</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="cabin-environment"><strong>Preferred Cabin Environment:</strong></label>
+                        <select id="cabin-environment" name="cabinEnvironment">
+                            <option value="earth">Earth-like Atmosphere</option>
+                            <option value="mars">Mars-like Atmosphere</option>
+                            <option value="venus">Venus-like Atmosphere</option>
+                            <option value="space">Space Vacuum</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h3><strong>Message to Crew</strong></h3>
+                    <textarea rows="5" cols="80" name="noteToCrew" id="note-to-crew" placeholder="Enter any special messages here..."></textarea>
+                </div>
+
+                <br>
+                <div class="form-buttons">
+                    <input type="reset" value="Reset" id="form-reset"/>
+                    <input type="submit" value="Submit" id="form-submit" onclick="return confirm('Are you sure you want to submit your flight booking?')"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
-        document.getElementById('planetForm').addEventListener('submit', function(event) {
-            const selectElement = document.getElementById('planet-select');
-            if (selectElement.value === "") {
-                alert('Please select a planet before proceeding.');
-                event.preventDefault(); // Prevent form from submitting
+        function toggleAudio() {
+            var audio = document.getElementById('background-audio');
+            var button = document.getElementById('audio-control');
+            if (audio.paused) {
+                audio.play();
+                button.textContent = 'Mute Audio';
             } else {
-                this.querySelector('input[type="submit"]').value = "Processing...";
-                this.querySelector('input[type="submit"]').disabled = true;
+                audio.pause();
+                button.textContent = 'Play Audio';
             }
-        });
+        }
     </script>
+
 </body>
 </html>

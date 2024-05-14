@@ -4,10 +4,15 @@
 ## Overview
 Fly Me to the Moon is a web application that allows users to book flights to the moon. Users can enter their details, choose their flight preferences, and confirm their bookings. The application uses Express.js for the backend, MongoDB for data storage, and EJS for templating.
 
+#liveServer
+https://myapp-8hx7.onrender.com/
+
 ##
 Daniel Berhane
 
 UID: 120206849
+
+
 
 ## Api used
 'http://api.open-notify.org/iss-now.json'
@@ -31,7 +36,7 @@ Additional Libraries: body-parser, dotenv, mongodb, axios
 1. Clone the repository:
     ```sh
     git clone https://github.com/yourusername/myapp.git
-    cd fly-me-to-the-moon
+    cd myapp
     ```
 
 2. Install dependencies:

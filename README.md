@@ -11,11 +11,14 @@ youtubedemo
 https://youtu.be/NCPOx-bVtuI
 
 ##
-Daniel Berhane
+    Submitted by: Daniel Berhane (dberhane)
+            Group Members:N/A
+
 
 UID: 120206849
 
-
+##
+email: dberhane@terpmail.umd.edu
 
 ## Api used
 'http://api.open-notify.org/iss-now.json'

@@ -30,13 +30,10 @@ app.post("/processFlightBooking", async (request, response) => {
         ticketNumber: request.body.ticketNumber,
         accommodation: request.body.accommodation,
         flightProvider: request.body.flightProvider,
-        nationality: request.body.nationality || null,
-        species: request.body.species || null,
-        flightClass: request.body.flightClass || null,
         reason: request.body.reason,
         spaceSuitSetting: request.body.spaceSuitSetting,
         cabinEnvironment: request.body.cabinEnvironment,
-        specialRequests: request.body.specialRequests,
+        noteToCrew: request.body.noteToCrew, 
     };
 
     console.log('Received data:', info);
@@ -59,11 +56,10 @@ async function createBookingsCards() {
                             <h3>${booking.name || 'N/A'}</h3>
                             <p><strong>Email:</strong> ${booking.email || 'N/A'}</p>
                             <p><strong>Age:</strong> ${booking.age || 'N/A'}</p>
-                            <p><strong>Nationality:</strong> ${booking.nationality || 'N/A'}</p>
-                            <p><strong>Species:</strong> ${booking.species || 'N/A'}</p>
                             <p><strong>Class:</strong> ${booking.flightClass || 'N/A'}</p>
                             <p><strong>Flight Provider:</strong> ${booking.flightProvider || 'N/A'}</p>
                             <p><strong>Reason:</strong> ${booking.reason || 'N/A'}</p>
+                            <p><strong>Note to Crew:</strong> ${booking.noteToCrew || 'N/A'}</p>
                          </div>`;
         });
         cardHtml += "</div>";
